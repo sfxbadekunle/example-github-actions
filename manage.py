@@ -1,8 +1,8 @@
 from flask_script import Manager
-from app import create_app
+from app import boot_application
 
 
-manger = Manager(create_app())
+manger = Manager(boot_application())
 
 if __name__ == "__main__":
     manger.run()

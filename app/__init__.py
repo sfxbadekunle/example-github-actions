@@ -1,6 +1,6 @@
 from flask import Flask
 
-def create_app():
+def boot_application():
     app = Flask(__name__)
 
 
