@@ -11,11 +11,12 @@ on:
   pull_request:
     branches: [ main ]
 
-jobs:
-  setup:
-    runs-on: ubuntu-latest
+jobs: 
+  test:
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
+        os: [ubuntu-latest, macos-latest]
         python_version: [3.7, 3.8, 3.9]
     steps:
       - uses: actions/checkout@v2
@@ -23,13 +24,6 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python_version }}
-  test:
-    needs: setup
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest]
-    steps:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -47,6 +41,7 @@ jobs:
           pytest
   
   deploy:
+    - uses: actions/checkout@v2
     needs: test
     runs-on: ${{ matrix.os }}
     strategy:
