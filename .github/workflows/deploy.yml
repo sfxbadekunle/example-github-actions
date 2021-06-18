@@ -26,7 +26,8 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          args: --severity-threshold=high
+          args: |
+            --severity-threshold=high --file=requirements.txt --command=python3 --allow-missing
       
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
