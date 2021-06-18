@@ -41,7 +41,6 @@ jobs:
           pytest
   
   deploy:
-    - uses: actions/checkout@v2
     needs: test
     runs-on: ${{ matrix.os }}
     strategy:
@@ -49,6 +48,7 @@ jobs:
         os: [ubuntu-latest, macos-latest]
     if: ${{ github.even_name == 'pull_request' && github.ref == 'refs/heads/main' }}
     steps:
+      - uses: actions/checkout@v2
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       
