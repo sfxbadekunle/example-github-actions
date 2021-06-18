@@ -69,7 +69,7 @@ jobs:
           context: .
           push: true
           addLatest: true
-          tags: tonytunde2012/sampleflask:latest
+          tags: tonytunde2012/sampleflask:0.0.1, tonytunde2012/sampleflask:latest
       
       - name: Update repo description
         uses: peter-evans/dockerhub-description@v2
