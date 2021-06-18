@@ -15,7 +15,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
-        python_version: [3.7, 3.8, 3.9]
+        python_version: [3.8, 3.9]
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python
@@ -40,10 +40,7 @@ jobs:
   
   deploy:
     needs: test
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest]
+    runs-on: ubuntu-latest
     if: ${{ github.even_name != 'pull_request' && github.ref == 'refs/heads/main' }}
     steps:
       - uses: actions/checkout@v2
@@ -66,7 +63,6 @@ jobs:
         with:
           context: .
           push: true
-          addLatest: true
           tags: tonytunde2012/sampleflask:0.0.1, tonytunde2012/sampleflask:latest
       
       - name: Update repo description
